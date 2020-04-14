@@ -1,0 +1,29 @@
+Query must be selected from the interface.
+
+The operation to be executed will be asked. Find, Distinct or Aggregate must be chosen. 
+
+If find is chosen, the number of queries to be made will be asked and the user has to enter a number.
+The collections that can be queried will be displayed and the user has to choose.
+The user has a choice to either do a selection or to type the query code.
+
+If selection, the user has to select the simple or advanced search :
+	Simple search selected
+		The simple search will display columns that are simpler to read and can be 		selected.	
+		The user has to select the query type.
+		The user has to type the search term.
+	Advanced search selected 
+		The advanced search will display columns in its original form.
+		The user has to select the query type.
+		The user has to type the search term.
+
+If type is selected :
+	The user has to type in the query code. Examples are provided.
+
+If distinct is selected, the columns in its original form displayed and can be selected.
+
+If aggregate is selected, the code must be typed into the codebox. Examples are provided.
+
+Find results will be stored into the json file specified.
+	The number of entries found with a description will be saved into the text file specified.
+Distinct results will be stored into the text file specified.
+Aggregate results will be stored into the json file specified.

@@ -1,0 +1,14 @@
+Installing Mongodb
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
+
+Prerequisite is to have homebrew installed. 
+
+After installing, run mongod on one terminal and mongo on a separate terminal. 
+
+Some example commands for the command line interface of MongoDB are listed
+show dbs				//show all databases in this MongoDB instance
+use dbName				//will create the database if it is not created
+db.createCollection("collectionName");	//will create the collection if it is not created. Case sensitive
+db.<collectionName>.find();		//basic search command for the collection
+db.<collectionName>.drop()		//command to drop the named collection
+drop dbName				//command to drop the named db

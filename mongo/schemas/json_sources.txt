@@ -1,0 +1,5 @@
+https://nvd.nist.gov/vuln/data-feeds#JSON_FEED		#JSON files are not present in the folder due to size limits
+
+https://www.privacyrights.org/
+
+https://github.com/vz-risk/VCDB

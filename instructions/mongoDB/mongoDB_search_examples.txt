@@ -1,0 +1,133 @@
+Check a field's type
+[ { "$project": { "fieldType": { "$type": "$FIELDTOBECHECKED"  } } } ]
+
+Find without word example:
+{ "description" : { "$regex" : "^((?!potential).)*$"}}
+
+Logical operator example:
+{ "$and": [ { "tool" : { "$eq": "Ransomware" } }, { "incident_date.year": { "$gte" : 2010 } } ] }
+
+{ "$and": [ { "monetary_loss.amount" : { "$gte": 500000000 } }, { "incident_date.year": { "$eq": 2016 } } ] }
+
+{ "$and": [ {"monetary_loss.currency": {"$eq": "USD" } }, { "incident_date.year": { "$eq": 2016 } } ] }
+
+Aggregation example. Sums up the total monetary loss that is not an estimate by year for records with type vcdb:
+[	{"$match" : { 
+        	"type" : { "$eq": "vcdb" },
+			"incident_date.year" : { "$gte" : 2010 },
+			"monetary_loss.currency": {"$eq": "USD" },
+			"monetary_loss.isEstimate" : { "$eq": "No" },}},
+	{"$group" : {
+		"_id" : "$incident_date.year",
+		"lossAmt" : { "$sum" : { "$sum" : "$monetary_loss.amount"}},
+		"count" : { "$sum" : 1 }}},
+	{"$project" :{
+		"_id" : 0,
+		"year" : "$_id",
+		"lossAmt" : 1,
+		"count" : 1}},
+	{"$sort" : { "year": -1 }}	]
+
+Aggregation example. Counts the number of ransomware occurrences by year for records with type vcdb:
+[	{"$match" : { 
+        	"type" : { "$eq": "vcdb" },
+			"incident_date.year" : { "$gte" : 2010 },
+			"tool" : {"$eq": "Ransomware"}}},
+	{"$group" : {
+		"_id" : "$incident_date.year",
+		"count" : { "$sum" : 1 }}},
+	{"$project" :{
+		"_id" : 0,
+		"year" : "$_id",
+		"count" : 1}},
+	{"$sort" : { "year": -1 }}	]
+
+Aggregation example. Counts the number of medical organisations incidents by year with ISODate:
+[	
+		{"$match" : { 
+			"industry" : {"$eq": "Medical"}}},
+		{"$project" : {
+			"year" : { "$year" : "$entry_date.date"}}
+		},
+		{"$match" : { 
+			"year" : {"$gte" : 2010}}},
+		{"$group" : {
+			"_id" : "$year",
+			"count" : { "$sum" : 1 }}},
+		{"$project" :{
+			"_id" : 0,
+			"year" : "$_id",
+			"count" : 1}},
+		{"$sort" : { "year": -1 }}	]
+
+Aggregation example. Counts the number of Information Technology organisations incidents by year with ISODate:
+[	
+		{"$match" : { 
+			"industry" : {"$eq": "Information Technology"}}},
+		{"$project" : {
+			"entry_date.year" : { "$year" : "$entry_date.date"}}
+		},
+		{"$match" : { 
+			"year" : {"$gte" : 2010}}},
+		{"$group" : {
+			"_id" : "$year",
+			"count" : { "$sum" : 1 }}},
+		{"$project" :{
+			"_id" : 0,
+			"year" : "$_id",
+			"count" : 1}},
+		{"$sort" : { "year": -1 }}	]
+
+Aggregation example. Counts the number of Finance organisations incidents by year with ISODate:
+[	
+		{"$match" : { 
+			"industry" : {"$eq": "Finance"}}},
+		{"$project" : {
+			"year" : { "$year" : "$entry_date.date"}}
+		},
+		{"$match" : { 
+			"year" : {"$gte" : 2010}}},
+		{"$group" : {
+			"_id" : "$year",
+			"count" : { "$sum" : 1 }}},
+		{"$project" :{
+			"_id" : 0,
+			"year" : "$_id",
+			"count" : 1}},
+		{"$sort" : { "year": -1 }}	]
+
+Aggregation example. Counts the number of Educational Institutes incidents by year with ISODate:
+[	
+		{"$match" : { 
+			"industry" : {"$eq": "Education"}}},
+		{"$project" : {
+			"year" : { "$year" : "$entry_date.date"}}
+		},
+		{"$match" : { 
+			"year" : {"$gte" : 2010}}},
+		{"$group" : {
+			"_id" : "$year",
+			"count" : { "$sum" : 1 }}},
+		{"$project" :{
+			"_id" : 0,
+			"year" : "$_id",
+			"count" : 1}},
+		{"$sort" : { "year": -1 }}	]
+
+Aggregation example. Counts the number of Government organisations incidents by year with ISODate:
+[	
+		{"$match" : { 
+			"industry" : {"$eq": "Government"}}},
+		{"$project" : {
+			"year" : { "$year" : "$entry_date.date"}}
+		},
+		{"$match" : { 
+			"year" : {"$gte" : 2010}}},
+		{"$group" : {
+			"_id" : "$year",
+			"count" : { "$sum" : 1 }}},
+		{"$project" :{
+			"_id" : 0,
+			"year" : "$_id",
+			"count" : 1}},
+		{"$sort" : { "year": -1 }}	]

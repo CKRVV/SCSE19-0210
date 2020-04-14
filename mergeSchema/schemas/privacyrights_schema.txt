@@ -1,0 +1,10 @@
+Type
+Date
+Victim
+Org_Type
+Location
+Breach_Type
+Records_Affected
+Description
+Info_Source
+Source_Link
